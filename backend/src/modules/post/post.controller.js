@@ -5,7 +5,7 @@ import postModel from '../../database/models/post.model.js';
 import { createPost, getAllPosts } from './post.service.js';
 const router = Router();
 
-router.get('/', getAllPosts)
+router.get('/getAllPosts', getAllPosts)
 router.post('/',createPost)
 
 
