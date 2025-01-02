@@ -1,0 +1,66 @@
+/* Container for the author and download */
+.author {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap: 8px; /* Add spacing between elements */
+}
+
+/* Styling for the author icon */
+.author-icon {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* Styling for the author text */
+.author-text {
+  font-size: 14px;
+  margin: 0;
+  color: white;
+}
+
+/* Styling for the download icon */
+.download-icon {
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.download-icon:hover {
+  color: #00bcd4; /* Change color on hover */
+}
+
+/* Overlay styling */
+.overlay {
+  overflow: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-container:hover .card-img {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}

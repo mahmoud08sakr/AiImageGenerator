@@ -1,0 +1,32 @@
+.generated-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .generated-card-placeholder {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    border: 2px dashed #6c757d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .loader-icon {
+    font-size: 2rem;
+    color: #6c757d;
+  }
+  
+  .generated-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+  }
+  
