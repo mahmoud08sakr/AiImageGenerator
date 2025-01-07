@@ -8,10 +8,8 @@ dotenv.config()
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
+    api_secret: process.env.API_SECRET 
 });
-
-
 export const getAllPosts = handelAsycError(async (req, res, next) => {
     const posts = await postModel.find({})
     if (posts) {
@@ -35,7 +33,7 @@ export const createPost = async (req, res, next) => {
 
         return res.status(201).json({ success: true, data: post });
     } catch (error) {
-        console.error("Error creating post:", error.message); // Log error details
+        console.error("Error creating post:", error.message); 
         next(error);
     }
 };
