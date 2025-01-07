@@ -1,25 +1,25 @@
-/* Container for the author and download */
+
 .author {
   display: flex;
   align-items: center;
   margin-top: 5px;
-  gap: 8px; /* Add spacing between elements */
+  gap: 8px; 
 }
 
-/* Styling for the author icon */
+
 .author-icon {
   font-size: 14px;
   margin-right: 5px;
 }
 
-/* Styling for the author text */
+
 .author-text {
   font-size: 14px;
   margin: 0;
   color: white;
 }
 
-/* Styling for the download icon */
+
 .download-icon {
   font-size: 14px;
   cursor: pointer;
@@ -28,10 +28,10 @@
 }
 
 .download-icon:hover {
-  color: #00bcd4; /* Change color on hover */
+  color: #00bcd4;
 }
 
-/* Overlay styling */
+
 .overlay {
   overflow: hidden;
 

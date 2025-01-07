@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar.jsx";
-import "./Home.css"; // Import the CSS file for animations
+import "./Home.css";
 import SearchBar from "../components/SearchBar.jsx";
 import ImageCard from "../components/ImageCard.jsx";
-
 export default function Home() {
   return (
     <div>
@@ -19,7 +18,7 @@ export default function Home() {
       <div className="container text-center my-5">
       
       <ImageCard />
-
+      
       </div>
     </div>
   );

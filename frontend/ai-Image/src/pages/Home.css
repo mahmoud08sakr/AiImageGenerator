@@ -1,22 +1,36 @@
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    visibility: visible;
-  }
-  50% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+.container.text-center {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .fade {
-  animation: fadeInOut 3s ease-in-out infinite; /* 3s for full fade in and out cycle */
+  animation: fadeInOut 3s ease-in-out infinite;
 }
 
-.ai{
-  color: rgb(173, 202, 237);
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai {
+  color: #4a90e2;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

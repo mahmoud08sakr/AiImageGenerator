@@ -9,8 +9,12 @@ import cors from 'cors'
 const app = express()
 const port = 3000
 connectionDB()
-app.use(json())
-app.use(cors())
+app.use(express.json({ limit: "10mb" })); // Increase the limit as needed
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(cors({
+    origin: "http://localhost:5173", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  }));
 
 app.use('/api/posts', postRoutes)
 app.use('/api/ai', aiRouters)

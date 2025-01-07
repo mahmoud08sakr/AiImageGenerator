@@ -19,24 +19,24 @@ export const getAllPosts = handelAsycError(async (req, res, next) => {
     }
     next(CreateError(404, 'No post found'))
 })
+
+
 export const createPost = async (req, res, next) => {
     try {
         const { name, prompt, photo } = req.body;
 
-        // Upload the photo to Cloudinary and extract the secure URL
-        const { secure_url } = await cloudinary.uploader.upload(photo, { folder: 'posts' });
-
-        // Create the post in the database using the secure URL
-        const post = await postModel.create({ name, prompt, photo: secure_url });
-
-        if (post) {
-            return res.status(201).json({ success: true, data: post });
+        if (!name || !prompt || !photo) {
+            throw CreateError(400, "Missing required fields: name, prompt, or photo");
         }
 
-        // If post creation fails
-        throw CreateError(404, 'No post added');
+        const { secure_url } = await cloudinary.uploader.upload(photo, { folder: "posts" });
+
+        const post = await postModel.create({ name, prompt, photo: secure_url });
+
+        return res.status(201).json({ success: true, data: post });
     } catch (error) {
-        // Pass the error to the next middleware
+        console.error("Error creating post:", error.message); // Log error details
         next(error);
     }
 };
+

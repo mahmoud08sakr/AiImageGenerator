@@ -8,44 +8,90 @@ export default function GenerateImageForm({
   setLoading,
   post,
   setPost,
-  CreateCardLoading,
-  GeneratedCardLoading,
   setGeneratedCardLoading,
   setCreateCardLoading,
 }) {
-  // Local state to track if prompt has changed
   const [isPromptFilled, setIsPromptFilled] = useState(false);
 
+  const postImageFunction = async () => {
+    if (!post.author || !post.prompt || !post.photo) {
+      alert("Please fill in all required fields: author, prompt, and image.");
+      return;
+    }
+  
+    try {
+      setCreateCardLoading(true);
+  
+      const response = await fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: post.author,
+          prompt: post.prompt,
+          photo: post.photo,
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Backend post failed:", errorData);
+        alert(`Failed to add post: ${errorData.message || "Unknown error"}`);
+        return;
+      }
+  
+      const data = await response.json();
+      alert("Post added successfully!");
+      setPost({ author: "", prompt: "", photo: "" }); 
+      setImageUrl(null); 
+    } catch (error) {
+      console.error("Error posting image:", error.message);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setCreateCardLoading(false);
+    }
+  };
+  
+
+
   const generateImageFunction = async () => {
+    setLoading(true);
     setGeneratedCardLoading(true);
     setCreateCardLoading(true);
-    await GenerateImage({ prompt: post.prompt }).then((res) => {
-      setPost({
-        ...post,
-        photo: ` data:image/jpeg; base64 ,${res?.data?.photo}`,
-      });
-      setImageUrl(res.data.url);
+    try {
+      const response = await GenerateImage({ prompt: post.prompt });
+      console.log("API Response:", response);
+      if (response?.data?.photo) {
+        const photoData = `data:image/jpeg;base64,${response.data.photo}`;
+        setPost({
+          ...post,
+          photo: photoData, 
+        });
+        setImageUrl(photoData); 
+      } else {
+        console.error("No photo data received from API.");
+        alert("Failed to generate image. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error generating image:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
       setGeneratedCardLoading(false);
       setCreateCardLoading(false);
-    });
+    }
   };
-  const handleGenerateImage = () => {
-    setLoading(true); // Show loader
-    setImageUrl(""); // Clear previous image
-    // Simulate an image generation process (e.g., API call)
-    setTimeout(() => {
-      setImageUrl("https://picsum.photos/400/300"); // Simulate generated image URL
-      setLoading(false); // Hide loader
-    }, 3000); // 3-second delay
-  };
-  // Update post state and check if prompt is filled
+
   const handlePromptChange = (e) => {
-    setPost({ ...post, prompt: e.target.value });
-    setIsPromptFilled(e.target.value.trim() !== ""); // Enable buttons when prompt is not empty
+    const newPrompt = e.target.value;
+    setPost({ ...post, prompt: newPrompt });
+    setIsPromptFilled(newPrompt.trim() !== "");
   };
+
   return (
     <div>
-      <div className="">
+      <div>
         <h3>Generate Image With Prompt</h3>
         <h5>Write your prompt according to your imagination</h5>
         <div className="my-5">
@@ -56,7 +102,7 @@ export default function GenerateImageForm({
             className="form-control my-1"
             placeholder="Enter your name"
             onChange={(e) => setPost({ ...post, author: e.target.value })}
-            disabled={!isPromptFilled} // Disable until prompt is filled
+            required
           />
           <label htmlFor="prompt">Image Prompt</label>
           <textarea
@@ -69,15 +115,16 @@ export default function GenerateImageForm({
           <div className="d-flex justify-content-center">
             <button
               className="btn btn-outline-primary my-3"
-              onClick={handleGenerateImage}
-              disabled={GeneratedCardLoading || !isPromptFilled} // Disable if loading or no prompt
+              onClick={generateImageFunction}
+              disabled={!isPromptFilled}
             >
               <FontAwesomeIcon icon={faImage} className="me-2" />
-              {GeneratedCardLoading ? "Generating..." : "Generate Image"}
+              Generate Image
             </button>
             <button
               className="btn btn-outline-primary my-3 mx-3"
-              disabled={!isPromptFilled} // Disable until prompt is filled
+              disabled={!isPromptFilled || !post.photo}
+              onClick={postImageFunction} 
             >
               <FontAwesomeIcon icon={faPlus} className="me-2" />
               Post Image

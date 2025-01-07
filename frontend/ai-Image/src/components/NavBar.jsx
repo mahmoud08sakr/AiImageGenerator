@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faHome } from "@fortawesome/free-solid-svg-icons"; // Import icons
+import { faPlus, faHome } from "@fortawesome/free-solid-svg-icons"; 
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
@@ -14,7 +14,7 @@ export default function NavBar() {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          SKR-AI
+          Gen-Image_AI
         </a>
         <div className="d-flex justify-content-between w-100">
               <button

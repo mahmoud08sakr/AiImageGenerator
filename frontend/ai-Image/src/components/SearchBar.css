@@ -1,24 +1,24 @@
-/* Styling for the search input field */
 .input-group-text {
-  background-color: #f8f9fa; /* Light background color */
-  border: 1px solid #ced4da; /* Border to match input field */
-  padding: 10px; /* Ensure enough padding for the icon */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px 0 0 8px;
+  padding: 10px;
 }
 
 .search-icon {
-  font-size: 18px; /* Adjust icon size */
-  color: #6c757d; /* Icon color */
+  font-size: 1.2rem;
+  color: #4a90e2;
 }
 
 .form-control {
-  border-radius: 25px; /* Rounded edges */
-  padding-left: 30px; /* Create space for the icon */
-  height: 40px; /* Adjust input height */
+  border-radius: 0 8px 8px 0;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.container {
-  margin-top: 20px;
+.form-control:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
 }
